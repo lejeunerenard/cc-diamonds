@@ -1,5 +1,5 @@
-local cb = peripheral.wrap('left')
-local me = peripheral.wrap('bottom')
+local cb = peripheral.wrap('bottom')
+local me = peripheral.wrap('back')
 local chestMapping = {}
 
 
@@ -7,9 +7,7 @@ function getUuid(id,meta)
   return id + meta * 32768
 end
 
-chestMapping['_chendo_'] = 0 -- down
-chestMapping['svgnnblnc'] = 5 -- east
-chestMapping['DOOMSNAKE'] = 4 -- west
+chestMapping['lejeunerenard'] = 0 -- down
 
 while true do
   event, player, message = os.pullEvent("chat")
@@ -27,7 +25,7 @@ while true do
     direction = chestMapping[player]
 
     if not direction then
-      cb.tell(player, "No mapping for your chest, contact chendo")
+      cb.tell(player, "No mapping for your chest, contact lejeunerenard")
     else
 
       if item_id and meta then

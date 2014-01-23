@@ -1,0 +1,6 @@
+Name: Jarvis
+Description: Jarvis is a general purpose program is meant to be a helpful sidekick much like the computer program in Iron Man.
+Executable: jarvis
+Startup: jarvis.startup
+Author: Le Jeune Renard
+Copyright: Copyright (c) Sean Zellmer <sean@lejeunerenard.com>

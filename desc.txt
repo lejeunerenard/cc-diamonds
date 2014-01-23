@@ -1,0 +1,2 @@
+Collection of awesome shit for making Computer Craft programs and some useful programs.
+Report bugs at https://github.com/lejeunerenard/cc-diamonds/issues
