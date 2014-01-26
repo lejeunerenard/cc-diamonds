@@ -12,11 +12,16 @@ BaseObject = {
    super   = nil,
    name    = "Object",
    new     =
-      function(class)
+      function(class, flag, metaExtend)
          local obj  = {class = class}
          local meta = {
             __index = function(self,key) return class.methods[key] end 
          }            
+         if (metaExtend ~= nil) then
+            for k,v in pairs(metaExtend) do
+               meta[k] = v
+            end
+         end
          setmetatable(obj,meta)
          return obj
       end,
@@ -34,7 +39,7 @@ function setclass(name, super, meta)
       name  = name; 
       new   =
       function(self, ...) 
-         local obj = super.new(self, "___CREATE_ONLY___");
+         local obj = super.new(self, "___CREATE_ONLY___", meta);
             -- check if calling function init
             -- pass arguments into init function
          if (super.methods.init) then

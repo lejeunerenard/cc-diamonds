@@ -1,5 +1,6 @@
 os.loadAPI("__LIB__/setclass")
 
+local vector = {}
 function vector:add(other)
    -- Error check
    if self:size() ~= other:size() then
@@ -49,6 +50,11 @@ local vmetatable = setclass.setclass("Vector",nil,{
 	__unm = function( v ) return v:mul(-1) end,
 	__tostring = vector.tostring,
 })
+vmetatable.methods.add = vector.add
+vmetatable.methods.sub = vector.sub
+vmetatable.methods.mul = vector.mul
+vmetatable.methods.tostring = vector.tostring
+
 function vmetatable.methods:init(t, ...)
    self.data = {}
    local v = type(t) == 'table' and t or {t, ...}
