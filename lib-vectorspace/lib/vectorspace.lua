@@ -65,7 +65,7 @@ function vector:length()
    return math.sqrt(sqrLength)
 end
 -- Alias for length function
-vector:magnitude = vector:length
+-- vector:magnitude = vector:length
 function vector:normalize()
    return self:mul( 1 / self:length() )
 end
@@ -96,7 +96,7 @@ local vmetatable = {
 }
 
 function new(t, ...)
-   local v = (type(t) == 'table') ? t : {t, ...}
+   local v = type(t) == 'table' and t or {t, ...}
    setmetatable(v, vmetatable)
    return v
 end
