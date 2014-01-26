@@ -1,4 +1,4 @@
--- New Function
+os.loadAPI("__LIB__/setclass")
 
 local vector = {}
 function vector:size()
@@ -86,17 +86,14 @@ function vector:tostring()
    return string.sub(str, 1, -2)
 end
 
-local vmetatable = {
-	__index = vector,
-	__add = vector.add,
-	__sub = vector.sub,
-	__mul = vector.mul,
-	__unm = function( v ) return v:mul(-1) end,
-	__tostring = vector.tostring,
-}
+local vmetatable = setclass.setclass("Vector")
+function vmetatable.methods:init(t, ...)
+	self.__index = vector,
+	self.__add = vector.add,
+	self.__sub = vector.sub,
+	self.__mul = vector.mul,
+	self.__unm = function( v ) return v:mul(-1) end,
+	self.__tostring = vector.tostring,
 
-function new(t, ...)
-   local v = type(t) == 'table' and t or {t, ...}
-   setmetatable(v, vmetatable)
-   return v
+   return type(t) == 'table' and t or {t, ...}
 end

@@ -1,5 +1,6 @@
 Name: Vector Space
 Description: Vector Space Library for doing vector math on vectors of any dimension n.
+Dependency: lib-setclass
 Library: vectorspace
 Author: Le Jeune Renard
 Copyright: Copyright (c) Sean Zellmer <sean@lejeunerenard.com>
