@@ -1,6 +1,12 @@
 os.loadAPI("__LIB__/setclass")
 
-local vmetatable = setclass.setclass("Vector")
+local vmetatable = setclass.setclass("Vector",nil,{
+	self.__add = vmetatable.methods.add
+	self.__sub = vmetatable.methods.sub
+	self.__mul = vmetatable.methods.mul
+	self.__unm = function( v ) return v:mul(-1) end
+	self.__tostring = vmetatable.methods.tostring
+})
 function vmetatable.methods:size()
    local count = 0
 
@@ -52,7 +58,7 @@ function vmetatable.methods:dot(other)
    local dotProd = 0
 
    for k, v in pairs (self.data) do
-      dotProd = dotProd + self[k] * other[k];
+      dotProd = dotProd + self.data[k] * other.data[k];
    end
    return dotProd
 end
@@ -60,7 +66,7 @@ function vmetatable.methods:length()
    local sqrLength = 0
 
    for k, v in pairs (self.data) do
-      sqrLength = sqrLength + self[k] * self[k];
+      sqrLength = sqrLength + self.data[k] * self.data[k];
    end
    return math.sqrt(sqrLength)
 end
@@ -86,13 +92,7 @@ function vmetatable.methods:tostring()
    return string.sub(str, 1, -2)
 end
 function vmetatable.methods:init(t, ...)
-	self.__add = vmetatable.methods.add
-	self.__sub = vmetatable.methods.sub
-	self.__mul = vmetatable.methods.mul
-	self.__unm = function( v ) return v:mul(-1) end
-	self.__tostring = vmetatable.methods.tostring
    self.data = {}
-
    local v = type(t) == 'table' and t or {t, ...}
    -- Load values in from arguments
    for k, v in pairs(v) do
