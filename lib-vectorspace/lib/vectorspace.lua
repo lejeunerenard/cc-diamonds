@@ -88,12 +88,12 @@ end
 
 local vmetatable = setclass.setclass("Vector")
 function vmetatable.methods:init(t, ...)
-	self.__index = vector,
-	self.__add = vector.add,
-	self.__sub = vector.sub,
-	self.__mul = vector.mul,
-	self.__unm = function( v ) return v:mul(-1) end,
-	self.__tostring = vector.tostring,
+	self.__index = vector
+	self.__add = vector.add
+	self.__sub = vector.sub
+	self.__mul = vector.mul
+	self.__unm = function( v ) return v:mul(-1) end
+	self.__tostring = vector.tostring
 
    return type(t) == 'table' and t or {t, ...}
 end
