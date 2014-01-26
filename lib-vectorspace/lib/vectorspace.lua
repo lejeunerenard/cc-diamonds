@@ -101,3 +101,8 @@ function vmetatable.methods:init(t, ...)
       self[k] = v
    end
 end
+
+-- Alias for new function
+function new(t, ...)
+   return vmetatable:new(t, ...)
+end
