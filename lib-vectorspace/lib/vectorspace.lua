@@ -1,21 +1,6 @@
 os.loadAPI("__LIB__/setclass")
 
-local vmetatable = setclass.setclass("Vector",nil,{
-	self.__add = vmetatable.methods.add
-	self.__sub = vmetatable.methods.sub
-	self.__mul = vmetatable.methods.mul
-	self.__unm = function( v ) return v:mul(-1) end
-	self.__tostring = vmetatable.methods.tostring
-})
-function vmetatable.methods:size()
-   local count = 0
-
-   for _ in pairs (self.data) do
-      count = count + 1;
-   end
-   return count
-end
-function vmetatable.methods:add(other)
+function vector:add(other)
    -- Error check
    if self:size() ~= other:size() then
       error("Cannot add two vectors of different dimensions.")
@@ -28,7 +13,7 @@ function vmetatable.methods:add(other)
    end
    return vectorspace.new(addedV)
 end
-function vmetatable.methods:sub(other)
+function vector:sub(other)
    -- Error check
    if self:size() ~= other:size() then
       error("Cannot subtract two vectors of different dimensions.")
@@ -41,13 +26,44 @@ function vmetatable.methods:sub(other)
    end
    return vectorspace.new(subtractV)
 end
-function vmetatable.methods:mul(m)
+function vector:mul(m)
    local mulV = {}
 
    for k, v in pairs(self.data) do
       mulV[k] = self.data[k] * m;
    end
    return vectorspace.new(mulV)
+end
+function vector:tostring()
+   local str = ''
+
+   for k, v in pairs(self.data) do
+      str = str .. self.data[k] .. ","
+   end
+   return string.sub(str, 1, -2)
+end
+local vmetatable = setclass.setclass("Vector",nil,{
+	__add = vector.add,
+	__sub = vector.sub,
+	__mul = vector.mul,
+	__unm = function( v ) return v:mul(-1) end,
+	__tostring = vector.tostring,
+})
+function vmetatable.methods:init(t, ...)
+   self.data = {}
+   local v = type(t) == 'table' and t or {t, ...}
+   -- Load values in from arguments
+   for k, v in pairs(v) do
+      self.data[k] = v
+   end
+end
+function vmetatable.methods:size()
+   local count = 0
+
+   for _ in pairs (self.data) do
+      count = count + 1;
+   end
+   return count
 end
 function vmetatable.methods:dot(other)
    -- Error check
@@ -62,6 +78,14 @@ function vmetatable.methods:dot(other)
    end
    return dotProd
 end
+function vmetatable.methods:round()
+   local roundV = {}
+
+   for k, v in pairs(self.data) do
+      roundV[k] = math.floor(self.data[k] + 0.5);
+   end
+   return vectorspace.new(roundV)
+end
 function vmetatable.methods:length()
    local sqrLength = 0
 
@@ -74,30 +98,6 @@ end
 -- vector:magnitude = vector:length
 function vmetatable.methods:normalize()
    return self:mul( 1 / self:length() )
-end
-function vmetatable.methods:round()
-   local roundV = {}
-
-   for k, v in pairs(self.data) do
-      roundV[k] = math.floor(self.data[k] + 0.5);
-   end
-   return vectorspace.new(roundV)
-end
-function vmetatable.methods:tostring()
-   local str = ''
-
-   for k, v in pairs(self.data) do
-      str = str .. self.data[k] .. ","
-   end
-   return string.sub(str, 1, -2)
-end
-function vmetatable.methods:init(t, ...)
-   self.data = {}
-   local v = type(t) == 'table' and t or {t, ...}
-   -- Load values in from arguments
-   for k, v in pairs(v) do
-      self.data[k] = v
-   end
 end
 
 -- Alias for new function
