@@ -4,7 +4,7 @@ local vmetatable = setclass.setclass("Vector")
 function vmetatable.methods:size()
    local count = 0
 
-   for _ in pairs (self) do
+   for _ in pairs (self.data) do
       count = count + 1;
    end
    return count
@@ -17,7 +17,7 @@ function vmetatable.methods:add(other)
 
    local addedV = {}
 
-   for k, v in pairs(self) do
+   for k, v in pairs(self.data) do
       addedV[k] = self.data[k] + other.data[k];
    end
    return vectorspace.new(addedV)
@@ -30,7 +30,7 @@ function vmetatable.methods:sub(other)
 
    local subtractV = {}
 
-   for k, v in pairs(self) do
+   for k, v in pairs(self.data) do
       subtractV[k] = self.data[k] - other.data[k];
    end
    return vectorspace.new(subtractV)
@@ -38,7 +38,7 @@ end
 function vmetatable.methods:mul(m)
    local mulV = {}
 
-   for k, v in pairs(self) do
+   for k, v in pairs(self.data) do
       mulV[k] = self.data[k] * m;
    end
    return vectorspace.new(mulV)
@@ -51,7 +51,7 @@ function vmetatable.methods:dot(other)
 
    local dotProd = 0
 
-   for k, v in pairs (self) do
+   for k, v in pairs (self.data) do
       dotProd = dotProd + self[k] * other[k];
    end
    return dotProd
@@ -59,7 +59,7 @@ end
 function vmetatable.methods:length()
    local sqrLength = 0
 
-   for k, v in pairs (self) do
+   for k, v in pairs (self.data) do
       sqrLength = sqrLength + self[k] * self[k];
    end
    return math.sqrt(sqrLength)
@@ -72,7 +72,7 @@ end
 function vmetatable.methods:round()
    local roundV = {}
 
-   for k, v in pairs(self) do
+   for k, v in pairs(self.data) do
       roundV[k] = math.floor(self.data[k] + 0.5);
    end
    return vectorspace.new(roundV)
@@ -80,7 +80,7 @@ end
 function vmetatable.methods:tostring()
    local str = ''
 
-   for k, v in pairs(self) do
+   for k, v in pairs(self.data) do
       str = str .. self.data[k] .. ","
    end
    return string.sub(str, 1, -2)
@@ -91,6 +91,7 @@ function vmetatable.methods:init(t, ...)
 	self.__mul = vmetatable.methods.mul
 	self.__unm = function( v ) return v:mul(-1) end
 	self.__tostring = vmetatable.methods.tostring
+   self.data = {}
 
    local v = type(t) == 'table' and t or {t, ...}
    -- Load values in from arguments
