@@ -18,7 +18,7 @@ function vector:add(other)
    local addedV = {}
 
    for k, v in pairs(self) do
-      table.insert(addedV, self[k] + other[k]);
+      addedV[k] = self.data[k] + other.data[k];
    end
    return vectorspace.new(addedV)
 end
@@ -31,7 +31,7 @@ function vector:sub(other)
    local subtractV = {}
 
    for k, v in pairs(self) do
-      table.insert(subtractV, self[k] - other[k]);
+      subtractV[k] = self.data[k] - other.data[k];
    end
    return vectorspace.new(subtractV)
 end
@@ -39,7 +39,7 @@ function vector:mul(m)
    local mulV = {}
 
    for k, v in pairs(self) do
-      table.insert(mulV, self[k] * m);
+      mulV[k] = self.data[k] * m;
    end
    return vectorspace.new(mulV)
 end
@@ -73,7 +73,7 @@ function vector:round()
    local roundV = {}
 
    for k, v in pairs(self) do
-      table.insert(roundV, math.floor(self[k] + 0.5));
+      roundV[k] = math.floor(self.data[k] + 0.5);
    end
    return vectorspace.new(roundV)
 end
@@ -81,7 +81,7 @@ function vector:tostring()
    local str = ''
 
    for k, v in pairs(self) do
-      str = str .. self[k] .. ","
+      str = str .. self.data[k] .. ","
    end
    return string.sub(str, 1, -2)
 end
@@ -98,7 +98,7 @@ function vmetatable.methods:init(t, ...)
    local v = type(t) == 'table' and t or {t, ...}
    -- Load values in from arguments
    for k, v in pairs(v) do
-      self[k] = v
+      self.data[k] = v
    end
 end
 
