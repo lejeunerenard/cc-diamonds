@@ -1,2 +1,3 @@
 jarvis::1::Jarvis, a helpful computer sidekick.
 lib-vectorspace::2::Vector library to the nth dimension
+lib-setclass::1::setclass clones the basic object class to create new classes
