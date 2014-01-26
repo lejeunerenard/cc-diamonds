@@ -95,5 +95,9 @@ function vmetatable.methods:init(t, ...)
 	self.__unm = function( v ) return v:mul(-1) end
 	self.__tostring = vector.tostring
 
-   return type(t) == 'table' and t or {t, ...}
+   local v = type(t) == 'table' and t or {t, ...}
+   -- Load values in from arguments
+   for k, v in pairs(v) do
+      self[k] = v
+   end
 end
