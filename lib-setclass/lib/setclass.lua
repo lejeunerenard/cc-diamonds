@@ -24,7 +24,7 @@ BaseObject = {
    data    = {}
 }
 
-function setclass(name, super)
+function setclass(name, super, meta)
    if (super == nil) then
       super = BaseObject
    end
@@ -57,10 +57,18 @@ function setclass(name, super)
 
    -- if class slot unavailable, check super class
    -- if applied to argument, pass it to the class method new        
-   setmetatable(class, {
+   local defaultMeta = {
    __index = function(self,key) return self.super[key] end,
    __call  = function(self,...) return self.new(self,unpack(arg)) end 
-   })
+   }
+
+   if (meta ~= nil) then
+      for k,v in pairs(meta) do
+         defaultMeta[k] = v
+      end
+   end
+
+   setmetatable(class, defaultMeta)
 
    -- if instance method unavailable, check method slot in super class    
    setmetatable(class.methods, {
