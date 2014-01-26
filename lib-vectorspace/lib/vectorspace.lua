@@ -1,7 +1,7 @@
 os.loadAPI("__LIB__/setclass")
 
-local vector = {}
-function vector:size()
+local vmetatable = setclass.setclass("Vector")
+function vmetatable.methods:size()
    local count = 0
 
    for _ in pairs (self) do
@@ -9,7 +9,7 @@ function vector:size()
    end
    return count
 end
-function vector:add(other)
+function vmetatable.methods:add(other)
    -- Error check
    if self:size() ~= other:size() then
       error("Cannot add two vectors of different dimensions.")
@@ -22,7 +22,7 @@ function vector:add(other)
    end
    return vectorspace.new(addedV)
 end
-function vector:sub(other)
+function vmetatable.methods:sub(other)
    -- Error check
    if self:size() ~= other:size() then
       error("Cannot subtract two vectors of different dimensions.")
@@ -35,7 +35,7 @@ function vector:sub(other)
    end
    return vectorspace.new(subtractV)
 end
-function vector:mul(m)
+function vmetatable.methods:mul(m)
    local mulV = {}
 
    for k, v in pairs(self) do
@@ -43,7 +43,7 @@ function vector:mul(m)
    end
    return vectorspace.new(mulV)
 end
-function vector:dot(other)
+function vmetatable.methods:dot(other)
    -- Error check
    if self:size() ~= other:size() then
       error("Cannot compute the dot product of two vectors of different dimensions.")
@@ -56,7 +56,7 @@ function vector:dot(other)
    end
    return dotProd
 end
-function vector:length()
+function vmetatable.methods:length()
    local sqrLength = 0
 
    for k, v in pairs (self) do
@@ -66,10 +66,10 @@ function vector:length()
 end
 -- Alias for length function
 -- vector:magnitude = vector:length
-function vector:normalize()
+function vmetatable.methods:normalize()
    return self:mul( 1 / self:length() )
 end
-function vector:round()
+function vmetatable.methods:round()
    local roundV = {}
 
    for k, v in pairs(self) do
@@ -77,7 +77,7 @@ function vector:round()
    end
    return vectorspace.new(roundV)
 end
-function vector:tostring()
+function vmetatable.methods:tostring()
    local str = ''
 
    for k, v in pairs(self) do
@@ -85,15 +85,12 @@ function vector:tostring()
    end
    return string.sub(str, 1, -2)
 end
-
-local vmetatable = setclass.setclass("Vector")
 function vmetatable.methods:init(t, ...)
-	self.__index = vector
-	self.__add = vector.add
-	self.__sub = vector.sub
-	self.__mul = vector.mul
+	self.__add = vmetatable.methods.add
+	self.__sub = vmetatable.methods.sub
+	self.__mul = vmetatable.methods.mul
 	self.__unm = function( v ) return v:mul(-1) end
-	self.__tostring = vector.tostring
+	self.__tostring = vmetatable.methods.tostring
 
    local v = type(t) == 'table' and t or {t, ...}
    -- Load values in from arguments
