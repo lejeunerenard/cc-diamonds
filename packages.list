@@ -1,4 +1,4 @@
 jarvis::1::Jarvis, a helpful computer sidekick.
-lib-vectorspace::14::Vector library to the nth dimension
+lib-vectorspace::15::Vector library to the nth dimension
 lib-setclass::3::setclass clones the basic object class to create new classes
 lib-ngrams::1::A library for apporximate string matching

@@ -75,9 +75,9 @@ function vmetatable.methods:size()
 end
 function vmetatable.methods:dot(other)
    -- Error check
-   if self:size() ~= other:size() then
-      error("Cannot compute the dot product of two vectors of different dimensions.")
-   end
+   --if self:size() ~= other:size() then
+   --   error("Cannot compute the dot product of two vectors of different dimensions.")
+   --end
 
    local dotProd = 0
 
