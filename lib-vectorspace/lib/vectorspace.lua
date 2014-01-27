@@ -10,6 +10,7 @@ function vector:add(other)
    local addedV = {}
 
    for k, v in pairs(self.data) do
+      if other.data[k] == nil then other.data[k] = 0 end
       addedV[k] = self.data[k] + other.data[k];
    end
    return vectorspace.new(addedV)
@@ -23,6 +24,7 @@ function vector:sub(other)
    local subtractV = {}
 
    for k, v in pairs(self.data) do
+      if other.data[k] == nil then other.data[k] = 0 end
       subtractV[k] = self.data[k] - other.data[k];
    end
    return vectorspace.new(subtractV)
@@ -80,6 +82,7 @@ function vmetatable.methods:dot(other)
    local dotProd = 0
 
    for k, v in pairs (self.data) do
+      if other.data[k] == nil then other.data[k] = 0 end
       dotProd = dotProd + self.data[k] * other.data[k];
    end
    return dotProd
