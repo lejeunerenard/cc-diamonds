@@ -1,0 +1,6 @@
+Name: N-gram
+Description: A library for approximate string matching by dividing strings into sequences of n characters long.
+Library: ngram
+Dependency: lib-vectorspace
+Author: Le Jeune Renard
+Copyright: Copyright (c) Sean Zellmer <sean@lejeunerenard.com>
