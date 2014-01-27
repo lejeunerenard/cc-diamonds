@@ -13,7 +13,7 @@ os.loadAPI("__LIB__/vectorspace")
 
 local ngram = {}
 function ngram:tostring()
-   return textutils.serialize(self.data)
+   return self.data:tostring()
 end
 function ngram.strToVector( str, n )
    -- Default n
@@ -26,9 +26,9 @@ function ngram.strToVector( str, n )
    -- number of interations on a string l - n + 1
    for i=1, (string.len(str) - n + 1) do
       local key = string.sub(str, i, i+n)
-      print('key: '..key)
+      --print('key: '..key)
       if vTable[key] == nil then vTable[key] = 0 end
-      vTable[key] = vTable + 1
+      vTable[key] = vTable[key] + 1
    end
    return vectorspace.new(vTable)
 end
@@ -58,7 +58,9 @@ function ngrams.methods:mostSim(tableOfNgrams)
          highestSim = sim
       end
    end
-   return {hightest = tableOfNgrams[highest]}
+   local t = {}
+   t[highest] = tableOfNgrams[highest]
+   return t
 end
 
 -- Alias for new function
