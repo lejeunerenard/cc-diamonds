@@ -1,7 +1,7 @@
 Name: Jarvis
 Description: Jarvis is a general purpose program is meant to be a helpful sidekick much like the computer program in Iron Man.
 Executable: jarvis
-Executable: ItemDump
+Library: ItemDump
 Library: IdConvApi
 Dependency: lib-ngrams
 Startup: jarvis.startup

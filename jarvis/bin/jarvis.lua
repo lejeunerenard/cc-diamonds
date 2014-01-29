@@ -29,7 +29,7 @@ end
 -- Initialization
 print("Loading item dictionary...")
 -- Load converter
-local converter = IdConvApi.IdConv.create('__BIN__/ItemDump.lua')
+local converter = IdConvApi.IdConv.create('__LIB__/ItemDump')
 
 -- Create ngrams for current inventory
 local invNgrams = build_ngramMap(converter, ngramSize, me.listAll())
