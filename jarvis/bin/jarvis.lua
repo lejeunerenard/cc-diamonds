@@ -33,6 +33,9 @@ local converter = IdConvApi.IdConv.create('__LIB__/ItemDump')
 
 -- Create ngrams for current inventory
 local invNgrams = build_ngramMap(converter, ngramSize, me.listAll())
+print("Done. Jarvis is ready to serve.")
+print("Use your chat to make a request of jarvis")
+print("Ex: 'give cobblestone 64'")
 
 while true do
   event, player, message = os.pullEvent("chat")
