@@ -15,7 +15,7 @@ local ngram = {}
 function ngram:tostring()
    return self.data:tostring()
 end
-function ngram.strToVector( str, n )
+function strToVector( str, n )
    -- Default n
    if n == nil then
       n = 3
@@ -39,7 +39,7 @@ local ngrams = setclass.setclass("ngram",nil,{
 
 function ngrams.methods:init(str, n)
    if str == '' then error('string cannot be blank') end
-   self.data = ngram.strToVector(str,n)
+   self.data = strToVector(str,n)
 end
 
 function ngrams.methods:cosSim(other)
