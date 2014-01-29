@@ -17,14 +17,13 @@ function build_ngramMap(converter, ngramSize, inv)
    for k, v in pairs(inv) do
       local fullID = converter:getFullID(k)
       local item = converter:getDataFor(fullID.id,fullID.meta)
-      ngramMap[k] = ngram.strToVector(item.name, ngramSize)
+      ngramMap[k] = ngram.new(item.name, ngramSize)
    end
    return ngramMap
 end
 
 function searchInv(inv, searchStr)
-   local searchStrNgram = ngram.strToVector(searchStr)
-   return searchStrNgram:mostSim(inv)
+   return ngram.new(searchStr):mostSim(inv)
 end
 
 -- Initialization
