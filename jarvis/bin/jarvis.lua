@@ -15,7 +15,8 @@ local ngramSize = 3
 function build_ngramMap(converter, ngramSize, inv)
    local ngramMap = {}
    for k, v in pairs(inv) do
-      local item = converter:getDataFor(converter:getFullID(k))
+      local fullID = converter:getFullID(k)
+      local item = converter:getDataFor(fullID.id,fullID.meta)
       ngramMap[k] = ngram.strToVector(item.name, ngramSize)
    end
    return ngramMap
