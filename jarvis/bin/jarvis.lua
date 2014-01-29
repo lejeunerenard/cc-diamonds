@@ -54,7 +54,7 @@ while true do
       else
          local uuid
          -- Test if just ID or should fuzzy search
-         if string.match([%w:]+) then
+         if string.match(itemStr,'[%d:]+') then
             _, _, item_id, meta = string.find(itemStr, "(%d+):(%d+)")
 
 
