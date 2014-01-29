@@ -58,6 +58,7 @@ function ngrams.methods:mostSim(tableOfNgrams)
          highestSim = sim
       end
    end
+   if highest == nil then return nil end
    local t = {}
    t[highest] = tableOfNgrams[highest]
    return t
