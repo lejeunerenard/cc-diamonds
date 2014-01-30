@@ -80,7 +80,12 @@ while true do
             cb.tell(player, itemStr.." not found!")
          else
             retrieved_amount = me.retrieve(uuid, amount, direction)
-            cb.tell(player, "Sent " .. retrieved_amount .. " of " .. itemStr)
+
+            -- Get item info for tell
+            local fullID = converter:getFullID(uuid)
+            local item = converter:getDataFor(fullID.id,fullID.meta)
+
+            cb.tell(player, "Sent " .. retrieved_amount .. " of " .. item.name)
          end
       end
    end
