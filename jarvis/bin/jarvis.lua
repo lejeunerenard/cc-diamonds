@@ -40,7 +40,7 @@ print("Ex: 'give cobblestone 64'")
 while true do
   event, player, message = os.pullEvent("chat")
 
-  _, _, itemStr, amount = string.find(message, "give ([%w:]+) (%d+)")
+  _, _, itemStr, amount = string.find(message, "give ([%w:%s]+) (%d+)%s*$")
 
   if itemStr and amount then
 
