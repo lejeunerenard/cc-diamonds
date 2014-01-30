@@ -76,8 +76,12 @@ while true do
 
          print(uuid)
 
-         retrieved_amount = me.retrieve(uuid, amount, direction)
-         cb.tell(player, "Sent " .. retrieved_amount .. " of " .. itemStr)
+         if uuid == nil then
+            cb.tell(player, itemStr.." not found!")
+         else
+            retrieved_amount = me.retrieve(uuid, amount, direction)
+            cb.tell(player, "Sent " .. retrieved_amount .. " of " .. itemStr)
+         end
       end
    end
 end
