@@ -90,5 +90,7 @@ while true do
             cb.tell(player, "Sent " .. retrieved_amount .. " of " .. item.name)
          end
       end
+   elseif string.match(message,'jarvis restock') then
+      invNgrams = build_ngramMap(converter, ngramSize, me.listAll())
    end
 end
