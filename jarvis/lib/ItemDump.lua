@@ -2076,6 +2076,7 @@
 2728:0 = Altar of Light =  Altar of Light (#2728)
 2729:0 = Lilypad of Fertility =  Lilypad of Fertility (#2729)
 2730:0 = Wraith Node =  Wraith Node (#2730)
+2989:0 = Quantum Dust =  Quantum Dust (#2730)
 3099:0 = Static Charge Pad =  Static Charge Pad (#3099/0)
 3099:1 = Crystalizor Charge Pad =  Crystalizor Charge Pad (#3099/1)
 3099:2 = Lapotronic Charge Pad =  Lapotronic Charge Pad (#3099/2)
