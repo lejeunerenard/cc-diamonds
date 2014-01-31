@@ -69,8 +69,10 @@ while true do
          else
             -- Get uuid of closest match
             local closest = searchInv(invNgrams,itemStr)
-            for k,v in pairs(closest) do
-               uuid = k
+            if closest ~= nil then
+               for k,v in pairs(closest) do
+                  uuid = k
+               end
             end
          end
 
